@@ -1,0 +1,17 @@
+# ===== 核心依赖 =====
+numpy==1.26.4
+opencv-python==4.10.0.84
+pillow==13.0.0
+
+# ===== 人脸检测（SCRFD，CPU 推理）=====
+insightface==0.7.3
+onnxruntime==1.31.1
+
+# ===== 人脸识别特征提取（ArcFace ResNet18）=====
+torch==2.15.0
+
+# ===== 界面 =====
+streamlit==1.67.0
+
+# ===== 阈值测试脚本用 =====
+matplotlib==3.9.2

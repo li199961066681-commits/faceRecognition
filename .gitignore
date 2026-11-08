@@ -1,0 +1,59 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ===== 虚拟环境 =====
+.venv/
+venv/
+env/
+ENV/
+
+# ===== IDE / 编辑器 =====
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ===== 模型权重（可自动下载，体积大不上传）=====
+weights/*.pth
+weights/*.onnx
+scripts/weights/
+*.pth
+*.onnx
+
+# ===== 敏感数据：注册人脸照片 / 特征向量 / 测试照片（含真实人脸，禁止上传）=====
+data/
+
+# ===== 运行产物 =====
+threshold_curve.png
+*.log
+*.tmp
+
+# ===== 系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== 环境变量 / 密钥 =====
+.env
+.env.local
+*.key
