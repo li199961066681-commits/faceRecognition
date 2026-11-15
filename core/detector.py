@@ -1,9 +1,23 @@
 """人脸检测与对齐：SCRFD 检测人脸框+五关键点，按五点裁剪 112x112 标准人脸。"""
+import shutil
+from pathlib import Path
+
 import cv2
 import numpy as np
 from insightface.app import FaceAnalysis
-from insightface.utils import face_align
+from insightface.utils import face_align, ensure_available
 from insightface.utils.face_align import norm_crop
+
+
+def _flatten_buffalo_m(name="buffalo_m"):
+    """修复 insightface 0.7.3 解压后模型多套一层目录（buffalo_m/buffalo_m/*.onnx）
+    导致 FaceAnalysis 找不到 onnx 的问题。幂等，无副作用。"""
+    model_dir = Path(ensure_available("models", name))      # 首次运行会触发下载
+    nested = model_dir / name
+    if not any(model_dir.glob("*.onnx")) and nested.is_dir():
+        for f in nested.glob("*.onnx"):
+            shutil.move(str(f), str(model_dir / f.name))
+        shutil.rmtree(nested, ignore_errors=True)
 
 
 def imread_cn(path):
@@ -14,6 +28,7 @@ def imread_cn(path):
 
 class FaceDetector:
     def __init__(self, det_size=(640, 640), det_thresh=0.5):
+        _flatten_buffalo_m()   # 确保模型 onnx 在正确层级（修复 insightface 解压目录问题）
         self.app = FaceAnalysis(
             name="buffalo_m",
             allowed_modules=["detection"],      # 只用检测模块，识别特征由 extractor 负责
