@@ -65,7 +65,7 @@ def draw_result(bgr, bbox, text, ok=True):
     return np.array(pil)
 
 
-# ================= 页面一：注册 =================streamlit run app.py
+# ================= 页面一：注册 =================
 if page == "① 人员注册":
     st.header("① 人员注册")
     st.caption("每人上传 3~5 张不同角度/表情的照片；构图参考已验证成功的那类。")
